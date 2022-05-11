@@ -1,0 +1,13 @@
+.hourly-forecast {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+.hourly-forecast .title {
+    font-weight: 300;
+    margin-bottom: 1rem;
+}
+.hourly-forecast .cards-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}

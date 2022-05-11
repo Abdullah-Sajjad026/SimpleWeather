@@ -1,0 +1,12 @@
+.current-info__container {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    align-content: center;
+    height: 100%;
+}
+.current-info__container .single-row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}

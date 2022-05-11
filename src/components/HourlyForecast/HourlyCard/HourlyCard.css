@@ -1,0 +1,15 @@
+.hourly-card {
+    padding: 11px 24px;
+    background-color: rgba(0, 0, 0, 0.199);
+    margin: 20px;
+    border-radius: 6px;
+    text-align: center;
+}
+.hourly-card .time {
+    font-size: 1.3rem;
+}
+.hourly-card .icon {
+}
+.hourly-card .temp {
+    font-size: 1.4rem;
+}
