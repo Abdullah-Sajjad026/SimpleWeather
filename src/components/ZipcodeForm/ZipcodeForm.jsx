@@ -40,6 +40,7 @@ const ZipcodeForm = ({
                         </div>
                         <div className="col-auto d-flex align-items-center">
                             <input
+                                required
                                 type="number"
                                 className="form-control"
                                 value={zipcode}
@@ -56,6 +57,7 @@ const ZipcodeForm = ({
                         </div>
                         <div className="col-auto d-flex align-items-center">
                             <input
+                                required
                                 type="text"
                                 className="form-control"
                                 value={city}
@@ -90,6 +92,7 @@ const ZipcodeForm = ({
                         </div>
                         <div className="col-auto d-flex align-items-center">
                             <input
+                                required
                                 type="text"
                                 className="form-control"
                                 value={country}
