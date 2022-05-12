@@ -29,18 +29,19 @@
     color: #8390d6;
 }
 
-.weekly-card .weather .desc {
-}
-
-@media screen and (min-width: 992px) {
-}
-
 @media screen and (max-width: 992px) {
-    .weekly-card > div {
-        flex-basis: 33%;
-    }
     .weekly-card .img-wrapper img {
         width: 6.25rem;
         height: 6.25rem;
+    }
+}
+@media screen and (max-width: 768px) {
+    .weekly-card > div {
+        flex-basis: 33%;
+    }
+}
+@media screen and (max-width: 390px) {
+    .weekly-card > div {
+        flex-basis: 41%;
     }
 }
