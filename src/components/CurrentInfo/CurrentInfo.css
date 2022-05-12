@@ -11,7 +11,7 @@
 }
 
 .info-card__container {
-    padding: 8px;
+    padding: 0.5rem;
     width: 33%;
 }
 .info-card__container h3 {
@@ -19,7 +19,7 @@
 
 .info-card__container h6 {
     color: #8390d6;
-    font-size: 17px;
+    font-size: 1.0625rem;
 }
 
 @media screen and (max-width: 991px) {

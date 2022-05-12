@@ -2,20 +2,20 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    padding-right: 15px;
+    padding-right: 0.9375rem;
     border: 0;
     border-right: 1px solid wheat;
 }
 .current-weather__container .icon-col {
 }
 .current-weather__container .icon-col .icon {
-    width: 250px;
-    height: 250px;
+    width: 15.625rem;
+    height: 15.625rem;
 }
 .current-weather__container .text-col .temp {
     display: block;
     font-size: 3.1rem;
-    letter-spacing: 3px;
+    letter-spacing: 0.1875rem;
 }
 .current-weather__container .text-col .desc {
     font-weight: 300;
@@ -25,12 +25,12 @@
 
 @media screen and (max-width: 1200px) {
     .current-weather__container .icon-col .icon {
-        width: 200px;
-        height: 200px;
+        width: 12.5rem;
+        height: 12.5rem;
     }
     .current-weather__container .text-col .temp {
         font-size: 2.7rem;
-        letter-spacing: 3px;
+        letter-spacing: 0.1875rem;
     }
     .current-weather__container .text-col .desc {
         font-size: 1.3rem;

@@ -27,8 +27,10 @@ const App = () => {
                     setLong(position.coords.longitude);
                 },
                 (error) => {
+                    setLat("28.4212");
+                    setLong("70.2989");
                     alert(
-                        "Geolocation is not supported by your browser. Using default location."
+                        "Geolocation is not supported by your browser. Using default location. Add your location through form."
                     );
                 }
             );
