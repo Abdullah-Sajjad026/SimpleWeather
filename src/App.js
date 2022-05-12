@@ -7,6 +7,7 @@ import WeeklyForecast from "./components/WeeklyForecast/WeeklyForecast";
 import {useEffect, useState} from "react";
 import axios from "axios";
 import ZipcodeForm from "./components/ZipcodeForm/ZipcodeForm";
+import Loading from "./components/Loading/Loading";
 
 const App = () => {
     const [lat, setLat] = useState("");
@@ -22,8 +23,6 @@ const App = () => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
-                    console.log(position.coords.latitude);
-                    console.log(position.coords.longitude);
                     setLat(position.coords.latitude);
                     setLong(position.coords.longitude);
                 },
@@ -35,11 +34,6 @@ const App = () => {
             );
         }
     };
-    // current and daily endpoint
-    //  https://api.openweathermap.org/data/2.5/onecall?lat=30.1575&lon=71.5249&exclude=minutely,hourly&appid=24393b1b5186b9b5b6a7c4fdfa4f8e2d&units=metric
-
-    // 3 hours
-    //  https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&cnt=8&appid=24393b1b5186b9b5b6a7c4fdfa4f8e2d&units=metric
 
     // get hourly data by laitude and longitude on 1st loading of page
     const fetchHourlyData = async () => {
@@ -74,7 +68,7 @@ const App = () => {
         setHourlyData(data.list);
         setCity(data.city.name);
     };
-
+    // get current and weekly data for users added location
     const fetchOneCallDataByCustomLatLong = async (latitude, longitude) => {
         const {data} =
             await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,hourly&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}&units=metric
@@ -110,7 +104,7 @@ const App = () => {
                     }
                     country={country}
                 />
-                {currentData && hourlyData && weeklyData && (
+                {currentData && hourlyData && weeklyData && todayData ? (
                     <>
                         <Title city={city} country={country} />
                         <div className="row">
@@ -131,6 +125,8 @@ const App = () => {
                             convertIntoDateTime={convertIntoDateTime}
                         />
                     </>
+                ) : (
+                    <Loading />
                 )}
             </div>
         </main>

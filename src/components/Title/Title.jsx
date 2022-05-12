@@ -76,7 +76,6 @@ const Title = ({city, country}) => {
             month = "";
     }
 
-    console.log(date, month, day);
     return (
         <div>
             <h1 className="location">

@@ -2,7 +2,6 @@ import React from "react";
 import "./CurrentInfo.css";
 
 const CurrentInfo = ({currentData, todayData, convertIntoDateTime}) => {
-    console.log(currentData);
     const sunriseResult = convertIntoDateTime(currentData.sunrise);
     const sunrise = sunriseResult.toString().split(" ")[4];
     const sunsetResult = convertIntoDateTime(currentData.sunset);
