@@ -1,15 +1,30 @@
 import React from "react";
-import icon from "../../../images/mostlysunny.png";
 import "./WeeklyCard.css";
 
-const WeeklyCard = ({dailyData}) => {
+const WeeklyCard = ({dailyData, convertIntoDateTime}) => {
+    const dailyResult = convertIntoDateTime(dailyData.dt);
+
+    const day = dailyResult.toString().split(" ")[0];
+    const date = dailyResult.toString().split(" ")[2];
+    const month = dailyResult.toString().split(" ")[1];
     return (
         <article className="weekly-card">
             <div className="daydate">
-                <p className="day">6:00</p>
-                <p className="date">18 Jan</p>
+                <p className="day">{day}</p>
+                <p className="date">
+                    {date} {month}
+                </p>
             </div>
-            <img src={icon} alt="" className="icon" />
+            <div className="img-wrapper">
+                <img
+                    src={
+                        window.location.origin +
+                        `/images/${dailyData.weather[0].icon}.png`
+                    }
+                    alt=""
+                    className="icon"
+                />
+            </div>
             <div className="high">
                 <p className="temp">
                     {dailyData.temp.max} <sup>o</sup> C
@@ -18,7 +33,7 @@ const WeeklyCard = ({dailyData}) => {
             </div>
             <div className="weather">
                 <p className="temp">
-                    {dailyData.temp.day} <sup>o</sup> C<sup>o</sup>
+                    {dailyData.temp.day} <sup>o</sup> C
                 </p>
                 <p className="desc">{dailyData.weather[0].main}</p>
             </div>

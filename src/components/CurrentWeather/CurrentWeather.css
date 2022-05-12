@@ -3,6 +3,7 @@
     justify-content: space-evenly;
     align-items: center;
     padding-right: 15px;
+    border: 0;
     border-right: 1px solid wheat;
 }
 .current-weather__container .icon-col {
@@ -20,4 +21,26 @@
     font-weight: 300;
     font-size: 1.4rem;
     color: #bbc4e9;
+}
+
+@media screen and (max-width: 1200px) {
+    .current-weather__container .icon-col .icon {
+        width: 200px;
+        height: 200px;
+    }
+    .current-weather__container .text-col .temp {
+        font-size: 2.7rem;
+        letter-spacing: 3px;
+    }
+    .current-weather__container .text-col .desc {
+        font-size: 1.3rem;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .current-weather__container {
+        margin-bottom: 2rem;
+        border-right: 0;
+        border-bottom: 1px solid #8390d6;
+    }
 }

@@ -3,10 +3,32 @@
     grid-template-rows: 1fr 1fr;
     align-content: center;
     height: 100%;
+    border: 0;
 }
 .current-info__container .single-row {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
     width: 100%;
+    display: flex;
+}
+
+.info-card__container {
+    padding: 8px;
+    width: 33%;
+}
+.info-card__container h3 {
+}
+
+.info-card__container h6 {
+    color: #8390d6;
+    font-size: 17px;
+}
+
+@media screen and (max-width: 991px) {
+    .info-card__container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .current-info__container {
+        border-bottom: 1px solid #8390d6;
+    }
 }

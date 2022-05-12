@@ -16,6 +16,7 @@ const App = () => {
     const [currentData, setCurrentData] = useState("");
     const [hourlyData, setHourlyData] = useState("");
     const [weeklyData, setWeeklyData] = useState("");
+    const [todayData, setTodayData] = useState("");
 
     const getUserCoordinates = () => {
         if (navigator.geolocation) {
@@ -40,73 +41,95 @@ const App = () => {
     // 3 hours
     //  https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&cnt=8&appid=24393b1b5186b9b5b6a7c4fdfa4f8e2d&units=metric
 
+    // get hourly data by laitude and longitude on 1st loading of page
     const fetchHourlyData = async () => {
         const {data} = await axios.get(
-            `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&cnt=8&appid=24393b1b5186b9b5b6a7c4fdfa4f8e2d&units=metric`
+            `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&cnt=8&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}&units=metric`
         );
 
         setHourlyData(data.list);
         setCity(data.city.name);
         setCountry(data.city.country);
     };
-    const fatchOneCallData = async () => {
+    // get current and weekly data by laitude and longitude on 1st loading of page
+
+    const fetchOneCallData = async () => {
         const {data} =
-            await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely,hourly&appid=24393b1b5186b9b5b6a7c4fdfa4f8e2d&units=metric
+            await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely,hourly&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}&units=metric
       `);
         setCurrentData(data.current);
         setWeeklyData(data.daily);
+        setTodayData(data.daily[0]);
     };
+
+    // get hourly data by zipcode on 1st loading of page
+
     const fetchHourlyDataByZipcode = async (zipcode) => {
         const {data} = await axios.get(
-            `https://api.openweathermap.org/data/2.5/forecast?zip=${zipcode},${country.toLowerCase()}&cnt=8&appid=24393b1b5186b9b5b6a7c4fdfa4f8e2d&units=metric`
+            `https://api.openweathermap.org/data/2.5/forecast?zip=${zipcode},${country.toLowerCase()}&cnt=8&appid=${
+                process.env.REACT_APP_OPENWEATHER_API_KEY
+            }&units=metric`
         );
 
         setHourlyData(data.list);
         setCity(data.city.name);
     };
-    const fetchOneCallDataByZipcode = async (zipcode) => {
-        console.log(zipcode);
+
+    const fetchOneCallDataByCustomLatLong = async (latitude, longitude) => {
         const {data} =
-            await axios.get(`https://api.openweathermap.org/data/2.5/onecall?zip=${zipcode},${country.toLowerCase()}&exclude=minutely,hourly&appid=24393b1b5186b9b5b6a7c4fdfa4f8e2d&units=metric
+            await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,hourly&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}&units=metric
       `);
         setCurrentData(data.current);
         setWeeklyData(data.daily);
+        setTodayData(data.daily[0]);
     };
 
     useEffect(() => {
         getUserCoordinates();
     }, []);
+
     useEffect(() => {
         if (lat && long) {
-            fatchOneCallData();
+            fetchOneCallData();
             fetchHourlyData();
-
-            currentData && console.log("currentData: ", currentData);
-            hourlyData && console.log("hourlyData: ", hourlyData);
-            weeklyData && console.log("weeklyData: ", weeklyData);
         }
-    }, [long, lat]);
+    }, [long]);
+
+    const convertIntoDateTime = (dt) => {
+        const dateTime = new Date(dt * 1000);
+        return dateTime;
+    };
 
     return (
         <main className="app">
             <div className="container">
                 <ZipcodeForm
                     fetchHourlyDataByZipcode={fetchHourlyDataByZipcode}
-                    fetchOneCallDataByZipcode={fetchOneCallDataByZipcode}
+                    fetchOneCallDataByCustomLatLong={
+                        fetchOneCallDataByCustomLatLong
+                    }
+                    country={country}
                 />
                 {currentData && hourlyData && weeklyData && (
                     <>
                         <Title city={city} country={country} />
                         <div className="row">
-                            <div className="col col-md-6">
+                            <div className="col-12 col-lg-6">
                                 <CurrentWeather currentData={currentData} />
                             </div>
-                            <div className="col col-md-6">
-                                <CurrentInfo currentData={currentData} />
+                            <div className="col-12 col-lg-6">
+                                <CurrentInfo
+                                    currentData={currentData}
+                                    todayData={todayData}
+                                    convertIntoDateTime={convertIntoDateTime}
+                                />
                             </div>
                         </div>
                         <HourlyForecast hourlyData={hourlyData} />
-                        <WeeklyForecast weeklyData={weeklyData} />
+                        <WeeklyForecast
+                            weeklyData={weeklyData}
+                            convertIntoDateTime={convertIntoDateTime}
+                        />
                     </>
                 )}
             </div>

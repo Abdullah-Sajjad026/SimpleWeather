@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
     padding: 10px 30px;
     background-color: rgba(0, 0, 0, 0.199);
     border-radius: 4px;
@@ -30,5 +31,16 @@
 
 .weekly-card .weather .desc {
 }
-.weekly-card {
+
+@media screen and (min-width: 992px) {
+}
+
+@media screen and (max-width: 992px) {
+    .weekly-card > div {
+        flex-basis: 33%;
+    }
+    .weekly-card .img-wrapper img {
+        width: 100px;
+        height: 100px;
+    }
 }
