@@ -1,0 +1,34 @@
+.weekly-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    background-color: rgba(0, 0, 0, 0.199);
+    border-radius: 4px;
+
+    margin: 15px 0;
+}
+.weekly-card > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.weekly-card .daydate .day,
+.weekly-card .high .temp,
+.weekly-card .weather .temp,
+.weekly-card .wind .speed,
+.weekly-card .rain .percentage {
+    font-size: 1.3rem;
+}
+.weekly-card .daydate .date,
+.weekly-card .high .desc,
+.weekly-card .weather .desc,
+.weekly-card .wind .desc,
+.weekly-card .rain .desc {
+    color: #8390d6;
+}
+
+.weekly-card .weather .desc {
+}
+.weekly-card {
+}

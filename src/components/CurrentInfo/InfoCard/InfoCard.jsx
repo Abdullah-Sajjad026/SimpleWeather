@@ -1,14 +1,14 @@
 import React from "react";
 import "./InfoCard.css";
 
-const InfoCard = () => {
+const InfoCard = ({data, title, extra}) => {
     return (
-        <span className="info-card__container">
+        <article className="info-card__container">
             <h2>
-                21<sup>o</sup>
+                {data} {extra}
             </h2>
-            <h6>High</h6>
-        </span>
+            <h6>{title}</h6>
+        </article>
     );
 };
 

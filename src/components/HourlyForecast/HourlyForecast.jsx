@@ -4,7 +4,7 @@ import "./HourlyForecast.css";
 
 const HourlyForecast = () => {
     return (
-        <div className="hourly-forecast">
+        <section className="hourly-forecast">
             <h4 className="title">Today's Weather</h4>
             <div className="cards-wrapper">
                 <HourlyCard />
@@ -15,7 +15,7 @@ const HourlyForecast = () => {
                 <HourlyCard />
                 <HourlyCard />
             </div>
-        </div>
+        </section>
     );
 };
 

@@ -13,11 +13,11 @@
 }
 .current-weather__container .text-col .temp {
     display: block;
-    font-size: 5rem;
-    letter-spacing: 5px;
+    font-size: 3.1rem;
+    letter-spacing: 3px;
 }
 .current-weather__container .text-col .desc {
     font-weight: 300;
-    font-size: 19px;
+    font-size: 1.4rem;
     color: #bbc4e9;
 }
