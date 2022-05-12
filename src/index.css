@@ -1,18 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400&display=swap");
-:root {
-}
-@media screen and (max-width: 992px) {
-    :root {
+
+@media (max-width: 992px) {
+    html {
         font-size: 15px;
     }
 }
-@media screen and (max-width: 768px) {
-    :root {
+@media (max-width: 768px) {
+    html {
         font-size: 14px;
     }
 }
-@media screen and (max-width: 550px) {
-    :root {
+@media (max-width: 550px) {
+    html {
         font-size: 13px;
     }
 }
