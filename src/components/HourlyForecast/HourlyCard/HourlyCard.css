@@ -13,3 +13,9 @@
 .hourly-card .temp {
     font-size: 1.4rem;
 }
+
+@media screen and (max-width: 300px) {
+    .hourly-card {
+        margin: 0.75rem;
+    }
+}

@@ -7,7 +7,21 @@
     margin-bottom: 1rem;
 }
 .hourly-forecast .cards-wrapper {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+@media screen and (max-width: 840px) {
+    .hourly-forecast .cards-wrapper {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+@media screen and (max-width: 630px) {
+    .hourly-forecast .cards-wrapper {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+@media screen and (max-width: 400px) {
+    .hourly-forecast .cards-wrapper {
+        grid-template-columns: 1fr;
+    }
 }
