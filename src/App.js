@@ -18,6 +18,7 @@ const App = () => {
     const [hourlyData, setHourlyData] = useState("");
     const [weeklyData, setWeeklyData] = useState("");
     const [todayData, setTodayData] = useState("");
+    const [loading, setLoading] = useState(true);
 
     const getUserCoordinates = () => {
         if (navigator.geolocation) {
@@ -40,6 +41,7 @@ const App = () => {
 
     // get hourly data by laitude and longitude on 1st loading of page
     const fetchHourlyData = async () => {
+        setLoading(true);
         const {data} = await axios.get(
             `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&cnt=8&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}&units=metric`
         );
@@ -47,16 +49,21 @@ const App = () => {
         setHourlyData(data.list);
         setCity(data.city.name);
         setCountry(data.city.country);
+
+        setLoading(false);
     };
     // get current and weekly data by laitude and longitude on 1st loading of page
 
     const fetchOneCallData = async () => {
+        setLoading(true);
         const {data} =
             await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${long}&exclude=minutely,hourly&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}&units=metric
       `);
         setCurrentData(data.current);
         setWeeklyData(data.daily);
         setTodayData(data.daily[0]);
+
+        setLoading(false);
     };
 
     useEffect(() => {
@@ -79,7 +86,7 @@ const App = () => {
         <main className="app">
             <div className="container">
                 <InputForm setLat={setLat} setLong={setLong} />
-                {currentData && hourlyData && weeklyData && todayData ? (
+                {!loading && currentData && weeklyData && todayData ? (
                     <>
                         <Title city={city} country={country} />
                         <div className="row">
