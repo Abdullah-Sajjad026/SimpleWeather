@@ -6,8 +6,8 @@ import HourlyForecast from "./components/HourlyForecast/HourlyForecast";
 import WeeklyForecast from "./components/WeeklyForecast/WeeklyForecast";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import ZipcodeForm from "./components/ZipcodeForm/ZipcodeForm";
 import Loading from "./components/Loading/Loading";
+import InputForm from "./components/InputForm/InputForm";
 
 const App = () => {
     const [lat, setLat] = useState("");
@@ -29,10 +29,11 @@ const App = () => {
                 (error) => {
                     setLat("28.4212");
                     setLong("70.2989");
-                    alert(
-                        "Geolocation is not supported by your browser. Using default location. Add your location through form."
-                    );
                 }
+            );
+        } else {
+            alert(
+                "Geolocation is not supported by your browser. Using default location. Add your location through form."
             );
         }
     };
@@ -58,28 +59,6 @@ const App = () => {
         setTodayData(data.daily[0]);
     };
 
-    // get hourly data by zipcode on 1st loading of page
-
-    const fetchHourlyDataByZipcode = async (zipcode) => {
-        const {data} = await axios.get(
-            `https://api.openweathermap.org/data/2.5/forecast?zip=${zipcode},${country.toLowerCase()}&cnt=8&appid=${
-                process.env.REACT_APP_OPENWEATHER_API_KEY
-            }&units=metric`
-        );
-
-        setHourlyData(data.list);
-        setCity(data.city.name);
-    };
-    // get current and weekly data for users added location
-    const fetchOneCallDataByCustomLatLong = async (latitude, longitude) => {
-        const {data} =
-            await axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=minutely,hourly&appid=${process.env.REACT_APP_OPENWEATHER_API_KEY}&units=metric
-      `);
-        setCurrentData(data.current);
-        setWeeklyData(data.daily);
-        setTodayData(data.daily[0]);
-    };
-
     useEffect(() => {
         getUserCoordinates();
     }, []);
@@ -89,7 +68,7 @@ const App = () => {
             fetchOneCallData();
             fetchHourlyData();
         }
-    }, [long]);
+    }, [long, lat]);
 
     const convertIntoDateTime = (dt) => {
         const dateTime = new Date(dt * 1000);
@@ -99,13 +78,7 @@ const App = () => {
     return (
         <main className="app">
             <div className="container">
-                <ZipcodeForm
-                    fetchHourlyDataByZipcode={fetchHourlyDataByZipcode}
-                    fetchOneCallDataByCustomLatLong={
-                        fetchOneCallDataByCustomLatLong
-                    }
-                    country={country}
-                />
+                <InputForm setLat={setLat} setLong={setLong} />
                 {currentData && hourlyData && weeklyData && todayData ? (
                     <>
                         <Title city={city} country={country} />
