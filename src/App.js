@@ -75,7 +75,7 @@ const App = () => {
             fetchOneCallData();
             fetchHourlyData();
         }
-    }, [long, lat]);
+    }, [long]);
 
     const convertIntoDateTime = (dt) => {
         const dateTime = new Date(dt * 1000);
